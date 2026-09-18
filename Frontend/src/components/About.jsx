@@ -1,103 +1,47 @@
-import { motion } from "framer-motion";
-import { FiArrowUpRight } from "react-icons/fi";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaCode, FaDatabase, FaServer, FaDesktop } from 'react-icons/fa';
 
-const capabilities = [
-  {
-    number: "01",
-    title: "Frontend Development",
-    description:
-      "Building responsive interfaces and modern React applications with a focus on structure, usability and clean visual systems.",
-  },
-  {
-    number: "02",
-    title: "Backend Development",
-    description:
-      "Creating APIs and server-side functionality with Node.js and Express.js for practical full-stack applications.",
-  },
-  {
-    number: "03",
-    title: "Database & Integration",
-    description:
-      "Working with MongoDB and connecting applications to reliable data systems and application logic.",
-  },
+const features = [
+  { icon: FaDesktop, title: 'Frontend Architecture', desc: 'Crafting responsive, dynamic UIs with React and Tailwind CSS.' },
+  { icon: FaServer, title: 'Backend Systems', desc: 'Building secure, scalable RESTful APIs with Express and Node.js.' },
+  { icon: FaDatabase, title: 'Database Design', desc: 'Structuring flexible and performant MongoDB schemas.' },
+  { icon: FaCode, title: 'Clean Code', desc: 'Writing maintainable, modular, and optimized JavaScript code.' },
 ];
 
-function About() {
+export default function About() {
   return (
-    <section id="about" className="section-padding">
-      <div className="container-main">
-        <div className="grid gap-12 lg:grid-cols-[220px_1fr] lg:gap-20">
-          <div>
-            <p className="section-label">01 — About</p>
-          </div>
+    <section id="about" className="py-24 bg-slate-900 px-6">
+      <div className="max-w-6xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">About Me</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto">
+            Full Stack Developer dedicated to constructing robust MERN stack applications with high engineering standards.
+          </p>
+        </motion.div>
 
-          <div>
-            <motion.h2
-              initial={{ opacity: 0, y: 24 }}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {features.map((item, idx) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.65 }}
-              className="section-heading max-w-[850px]"
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="p-6 rounded-2xl bg-slate-950 border border-slate-800 hover:border-cyan-500/50 transition-colors"
             >
-              Building with
-              <br />
-              <span className="text-[#777]">purpose.</span>
-            </motion.h2>
-
-            <div className="mt-10 grid max-w-[900px] gap-10 md:grid-cols-[1fr_260px] md:gap-16">
-              <p className="body-copy">
-                I&apos;m Keshav Garothia, a Full Stack Developer focused on
-                building web applications from interface to backend. I enjoy
-                turning ideas into structured, responsive and practical digital
-                experiences.
-              </p>
-
-              <div className="border-l border-[#202020] pl-5">
-                <p className="section-label mb-3">Approach</p>
-                <p className="text-sm leading-7 text-[#777]">
-                  Clear structure. Thoughtful interfaces. Reliable
-                  functionality.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-20 border-t border-[#202020]">
-              {capabilities.map((item, index) => (
-                <motion.div
-                  key={item.number}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{
-                    duration: 0.55,
-                    delay: index * 0.08,
-                  }}
-                  className="grid gap-5 border-b border-[#202020] py-7 md:grid-cols-[70px_250px_1fr] md:items-start md:gap-8"
-                >
-                  <span className="text-xs text-[#555]">{item.number}</span>
-
-                  <h3 className="text-base font-medium tracking-[-0.02em] text-[#e8e8e8]">
-                    {item.title}
-                  </h3>
-
-                  <div className="flex items-start justify-between gap-6">
-                    <p className="max-w-[540px] text-sm leading-7 text-[#777]">
-                      {item.description}
-                    </p>
-
-                    <FiArrowUpRight
-                      size={16}
-                      className="mt-1 hidden shrink-0 text-[#444] md:block"
-                    />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+              <item.icon className="text-cyan-400 mb-4" size={32} />
+              <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
+              <p className="text-slate-400 text-sm">{item.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
-
-export default About;

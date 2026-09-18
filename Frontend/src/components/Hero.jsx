@@ -1,145 +1,71 @@
-import { motion } from "framer-motion";
-import { FiArrowDown, FiArrowUpRight, FiGithub, FiLinkedin } from "react-icons/fi";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { HiMail, HiArrowDown } from 'react-icons/hi';
 
-const fadeUp = {
-  hidden: {
-    opacity: 0,
-    y: 24,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
-function Hero() {
+export default function Hero() {
   return (
-    <section id="top" className="relative min-h-screen pt-[82px]">
-      <div className="container-main flex min-h-[calc(100vh-82px)] flex-col justify-center py-20 lg:py-24">
-        <div className="grid items-end gap-14 lg:grid-cols-[1fr_280px] lg:gap-20">
-          <div>
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              className="mb-8 flex items-center gap-3"
-            >
-              <span className="h-px w-8 bg-[#555]" />
-              <span className="section-label text-[#777]">
-                Full Stack Developer
-              </span>
-            </motion.div>
+    <section className="min-h-screen flex items-center justify-center pt-20 px-6 relative bg-slate-950">
+      <div className="max-w-4xl mx-auto text-center">
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-cyan-400 font-medium mb-4 text-sm md:text-base tracking-wide uppercase"
+        >
+          MERN Stack Developer
+        </motion.p>
 
-            <motion.h1
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              transition={{ delay: 0.08 }}
-              className="max-w-[950px] text-[clamp(4rem,11vw,9rem)] font-semibold leading-[0.84] tracking-[-0.075em]"
-            >
-              Keshav
-              <br />
-              <span className="text-[#777]">Garothia.</span>
-            </motion.h1>
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight"
+        >
+          Building scalable Web Applications from <span className="bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">Frontend to Backend</span>
+        </motion.h1>
 
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              transition={{ delay: 0.16 }}
-              className="mt-10 max-w-[580px]"
-            >
-              <p className="text-base leading-7 text-[#8a8a8a] sm:text-lg sm:leading-8">
-                I build modern web experiences with clean interfaces,
-                thoughtful interactions and reliable full-stack functionality.
-              </p>
-            </motion.div>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="text-slate-400 text-base md:text-lg mb-8 max-w-2xl mx-auto"
+        >
+          Specialized in MongoDB, Express.js, React, and Node.js. Designing clean interfaces paired with high-performance APIs.
+        </motion.p>
 
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              transition={{ delay: 0.24 }}
-              className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
-            >
-              <a href="#projects" className="primary-button">
-                View My Work
-                <FiArrowUpRight size={15} />
-              </a>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <a href="#projects" className="w-full sm:w-auto px-8 py-3 rounded-full bg-cyan-500 text-slate-950 font-semibold hover:bg-cyan-400 transition-colors">
+            View Projects
+          </a>
+          <a href="#contact" className="w-full sm:w-auto px-8 py-3 rounded-full border border-slate-700 text-slate-300 font-semibold hover:bg-slate-900 transition-colors">
+            Get in Touch
+          </a>
+        </motion.div>
 
-              <a href="#contact" className="secondary-button">
-                Let&apos;s Talk
-                <FiArrowUpRight size={15} />
-              </a>
-            </motion.div>
-          </div>
-
-          <motion.aside
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.32 }}
-            className="border-t border-[#202020] pt-5 lg:border-t-0 lg:border-l lg:pl-7 lg:pt-0"
-          >
-            <div className="space-y-6">
-              <div>
-                <p className="section-label mb-2">Based in</p>
-                <p className="text-sm text-[#d0d0d0]">India</p>
-              </div>
-
-              <div>
-                <p className="section-label mb-2">Focus</p>
-                <p className="text-sm text-[#d0d0d0]">
-                  Full Stack Development
-                </p>
-              </div>
-
-              <div>
-                <p className="section-label mb-2">Stack</p>
-                <p className="text-sm leading-6 text-[#8a8a8a]">
-                  React / Node.js / MongoDB
-                </p>
-              </div>
-
-              <div className="flex items-center gap-4 pt-1">
-                <a
-                  href="#contact"
-                  aria-label="GitHub"
-                  className="text-[#777] transition-colors hover:text-white"
-                >
-                  <FiGithub size={17} />
-                </a>
-
-                <a
-                  href="#contact"
-                  aria-label="LinkedIn"
-                  className="text-[#777] transition-colors hover:text-white"
-                >
-                  <FiLinkedin size={17} />
-                </a>
-              </div>
-            </div>
-          </motion.aside>
-        </div>
-
-        <motion.a
-          href="#about"
+        <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-          className="mt-20 flex w-fit items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#555] transition-colors hover:text-[#aaa]"
-          aria-label="Scroll to about section"
+          transition={{ delay: 0.8 }}
+          className="flex justify-center space-x-6 mt-12 text-slate-400"
         >
-          <FiArrowDown size={14} />
-          Scroll to explore
-        </motion.a>
+          <a href="#" className="hover:text-cyan-400 transition-colors"><FaGithub size={24} /></a>
+          <a href="#" className="hover:text-cyan-400 transition-colors"><FaLinkedin size={24} /></a>
+          <a href="#" className="hover:text-cyan-400 transition-colors"><HiMail size={24} /></a>
+        </motion.div>
       </div>
+
+      <motion.div 
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-500"
+      >
+        <HiArrowDown size={20} />
+      </motion.div>
     </section>
   );
 }
-
-export default Hero;

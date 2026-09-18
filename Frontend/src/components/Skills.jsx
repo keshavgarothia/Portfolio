@@ -1,131 +1,60 @@
-import { motion } from "framer-motion";
-import {
-  SiCss,
-  SiExpress,
-  SiGit,
-  SiGithub,
-  SiHtml5,
-  SiJavascript,
-  SiMongodb,
-  SiNodedotjs,
-  SiReact,
-  SiTailwindcss,
-} from "react-icons/si";
+import React from 'react';
+import { motion } from 'framer-motion';
 
-const groups = [
+const skillCategories = [
   {
-    title: "Frontend",
-    items: [
-      { name: "React", icon: SiReact },
-      { name: "JavaScript", icon: SiJavascript },
-      { name: "HTML", icon: SiHtml5 },
-      { name: "CSS", icon: SiCss },
-      { name: "Tailwind CSS", icon: SiTailwindcss },
-    ],
+    category: 'Frontend',
+    skills: ['React.js', 'Redux Toolkit', 'Tailwind CSS', 'JavaScript (ES6+)', 'HTML5/CSS3', 'Framer Motion']
   },
   {
-    title: "Backend",
-    items: [
-      { name: "Node.js", icon: SiNodedotjs },
-      { name: "Express.js", icon: SiExpress },
-    ],
+    category: 'Backend',
+    skills: ['Node.js', 'Express.js', 'REST APIs', 'JWT Auth', 'WebSockets']
   },
   {
-    title: "Database",
-    items: [
-      { name: "MongoDB", icon: SiMongodb },
-    ],
-  },
-  {
-    title: "Tools",
-    items: [
-      { name: "Git", icon: SiGit },
-      { name: "GitHub", icon: SiGithub },
-    ],
-  },
+    category: 'Database & Tools',
+    skills: ['MongoDB', 'Mongoose', 'Git/GitHub', 'Postman', 'Vite', 'Docker Basics']
+  }
 ];
 
-function Skills() {
+export default function Skills() {
   return (
-    <section
-      id="skills"
-      className="section-padding border-y border-[#151515]"
-    >
-      <div className="container-main">
-        <div className="grid gap-12 lg:grid-cols-[220px_1fr] lg:gap-20">
-          <div>
-            <p className="section-label">02 — Skills</p>
-          </div>
+    <section id="skills" className="py-24 bg-slate-950 px-6">
+      <div className="max-w-6xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Technical Stack</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto">Technologies and tools used across full-stack production projects.</p>
+        </motion.div>
 
-          <div>
-            <motion.h2
-              initial={{ opacity: 0, y: 24 }}
+        <div className="grid md:grid-cols-3 gap-8">
+          {skillCategories.map((cat, idx) => (
+            <motion.div
+              key={cat.category}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.65 }}
-              className="section-heading max-w-[800px]"
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="p-6 rounded-2xl bg-slate-900 border border-slate-800"
             >
-              Tools I use
-              <br />
-              <span className="text-[#777]">to build.</span>
-            </motion.h2>
-
-            <div className="mt-16 border-t border-[#202020]">
-              {groups.map((group, groupIndex) => (
-                <motion.div
-                  key={group.title}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{
-                    duration: 0.5,
-                    delay: groupIndex * 0.06,
-                  }}
-                  className="grid gap-6 border-b border-[#202020] py-8 md:grid-cols-[170px_1fr] md:gap-10"
-                >
-                  <div>
-                    <p className="text-sm font-medium text-[#d0d0d0]">
-                      {group.title}
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
-                    {group.items.map((item) => {
-                      const Icon = item.icon;
-
-                      return (
-                        <div
-                          key={item.name}
-                          className="group flex min-h-[58px] items-center justify-between border-b border-[#171717] py-4"
-                        >
-                          <div className="flex items-center gap-3">
-                            <Icon
-                              size={15}
-                              aria-hidden="true"
-                              className="text-[#555] transition-colors group-hover:text-[#aaa]"
-                            />
-
-                            <span className="text-sm text-[#999] transition-colors group-hover:text-[#f5f5f5]">
-                              {item.name}
-                            </span>
-                          </div>
-
-                          <span
-                            className="h-1 w-1 rounded-full bg-[#333] transition-colors group-hover:bg-[#aaa]"
-                            aria-hidden="true"
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+              <h3 className="text-xl font-semibold text-cyan-400 mb-6">{cat.category}</h3>
+              <div className="flex flex-wrap gap-2">
+                {cat.skills.map((skill) => (
+                  <span 
+                    key={skill}
+                    className="px-3 py-1.5 rounded-lg bg-slate-950 text-slate-300 border border-slate-800 text-sm"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
-
-export default Skills;

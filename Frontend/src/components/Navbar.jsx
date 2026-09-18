@@ -1,108 +1,74 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { HiMenu, HiX } from 'react-icons/hi';
 
-const links = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Education", href: "#education" },
+const navLinks = [
+  { name: 'About', href: '#about' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Education', href: '#education' },
+  { name: 'Contact', href: '#contact' },
 ];
 
-function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const closeMenu = () => setMenuOpen(false);
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="absolute left-0 right-0 top-0 z-50">
-      <nav
-        className="container-main flex h-[82px] items-center justify-between border-b border-[#1a1a1a]"
-        aria-label="Main navigation"
-      >
-        <a
-          href="#top"
-          className="text-[15px] font-semibold tracking-[-0.03em]"
-          aria-label="Keshav Garothia home"
+    <nav className="fixed top-0 left-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <motion.a 
+          href="#" 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
         >
-          <span className="hidden sm:inline">Keshav Garothia</span>
-          <span className="sm:hidden">K</span>
-        </a>
+          DevPortfolio
+        </motion.a>
 
-        <div className="hidden items-center gap-8 md:flex">
-          {links.map((link) => (
-            <a
-              key={link.href}
+        <div className="hidden md:flex space-x-8">
+          {navLinks.map((link, idx) => (
+            <motion.a
+              key={link.name}
               href={link.href}
-              className="interactive-link text-[12px] font-medium text-[#777]"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              className="text-slate-300 hover:text-cyan-400 transition-colors font-medium text-sm"
             >
-              {link.label}
-            </a>
+              {link.name}
+            </motion.a>
           ))}
         </div>
 
-        <a
-          href="#contact"
-          className="hidden items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#d0d0d0] transition-colors hover:text-white md:flex"
+        <button 
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden text-slate-300 hover:text-white"
         >
-          Let&apos;s Talk
-          <FiArrowUpRight size={14} />
-        </a>
-
-        <button
-          type="button"
-          onClick={() => setMenuOpen((previous) => !previous)}
-          className="flex h-10 w-10 items-center justify-center text-[#d0d0d0] md:hidden"
-          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-          aria-expanded={menuOpen}
-        >
-          {menuOpen ? <FiX size={21} /> : <FiMenu size={21} />}
+          {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
         </button>
-      </nav>
+      </div>
 
       <AnimatePresence>
-        {menuOpen && (
+        {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden border-b border-[#202020] bg-[#080808] md:hidden"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="md:hidden bg-slate-900 border-b border-slate-800 px-6 py-4 flex flex-col space-y-4"
           >
-            <div className="container-main py-6">
-              <div className="flex flex-col">
-                {links.map((link, index) => (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    onClick={closeMenu}
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      duration: 0.2,
-                      delay: index * 0.04,
-                    }}
-                    className="border-b border-[#181818] py-4 text-xl font-medium tracking-[-0.03em] text-[#d0d0d0]"
-                  >
-                    {link.label}
-                  </motion.a>
-                ))}
-
-                <a
-                  href="#contact"
-                  onClick={closeMenu}
-                  className="mt-6 flex min-h-[48px] items-center justify-center gap-2 border border-white bg-white text-xs font-semibold uppercase tracking-[0.08em] text-black"
-                >
-                  Let&apos;s Talk
-                  <FiArrowUpRight size={15} />
-                </a>
-              </div>
-            </div>
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="text-slate-300 hover:text-cyan-400 text-sm font-medium"
+              >
+                {link.name}
+              </a>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </nav>
   );
 }
-
-export default Navbar;
